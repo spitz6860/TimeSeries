@@ -1,0 +1,12 @@
+/*<--Global*/
+.container-body {
+    min-width: 600px;
+    height: 100%;
+    width: 100%;
+}
+
+.container-main {
+    height: 100%;
+    padding: 50px 10% 200px 10%;
+    width: 100%;
+}

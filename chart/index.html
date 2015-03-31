@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>System Usage</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+			<link rel="stylesheet" type="text/css" href="/css/main.css">
+			<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+			<link rel="stylesheet" type="text/css" href="/css/angular-chart.css">
+			<script src="/js/jquery-2.1.3.min.js"></script>
+			<script src="/js/bootstrap.min.js"></script>
+			<script src="/js/moment.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+			<!--script src="/js/angular.min.js"></script-->
+			<script src="/js/chart.js"></script>
+			<script src="/js/angular-chart.min.js"></script>
+			<script src="/js/chartcontroller.js"></script>
+			<script src="/js/chartservice.js"></script>
+	
+		</head>
+		<body>
+			<div class="container-body" ng-app="chartApp">
+				<div class="container-main" ng-controller="chartController">
+					<div class="container-control row">
+						<div class="col-xs-10">
+							<form class="form-inline">
+								Show usage data in the past 
+								<select class="form-control" ng-model="timespan" ng-options="item as item.label for item in timespanOpt" ng-change="updateInterval(timespan)">
+								</select>
+								for every
+								<select class="form-control" ng-model="interval" ng-options="item as item.label for item in intervalOpt" ng-init="updateInterval(timespan)">
+								</select>
+								<button type="button" class="btn btn-default" ng-click="fetchData()">Go!</button>
+							</form>
+						</div>
+					
+						<div class="pull-right col-xs-2">
+							<div class="checkbox" ng-repeat="n in sysComponent">
+								<label>
+									<input type="checkbox" ng-model="n.checked">{{n.label}}
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="container-chart">
+						<div ng-repeat="(key, value) in dataChart" ng-if="value.show">
+							<h3 class="text-center">{{value.title}}</h3>
+							<canvas id="line" class="chart chart-line" data="value.usage"
+							  labels="labelChart" ng-show="value.show">
+							</canvas> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
