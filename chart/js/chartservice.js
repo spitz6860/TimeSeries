@@ -2,18 +2,7 @@ var chartApp = angular.module('chartApp');
 
 chartApp.service('chartService', ['$http', function($http) {
 	return {
-		initChart: function (title) {
-			return {
-				title: title,
-				total: '',
-				unit: '',
-				usage: [],
-				show: false,
-				options: {
-					pointHitDetectionRadius : 5
-				}
-			}
-		},
+
 		getData: function(component, timespan, interval) {
 			return $http.get('/api/' + component + '/' + timespan + '/' + interval)
 				.then(function(result) {
@@ -38,7 +27,7 @@ chartApp.service('chartService', ['$http', function($http) {
 			};
 			switch(timespan.value) {
 				case 'week':
-					label = populateLabel('day', 'MM/DD');
+					label = populateLabel('day', 'MM-DD HH:mm');
 					break;
 				case 'day':
 					label = populateLabel('hour', 'HH:mm');
