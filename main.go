@@ -25,25 +25,25 @@ type Routes []Route
 
 var routes = Routes{
 	Route{
-		"CPUUsage",
+		"CPU",
 		"GET",
 		"/api/cpu/{timespan}/{interval}",
 		GenerateCpuData,
 	},
 	Route{
-		"MemoryUsage",
+		"Memory",
 		"GET",
 		"/api/memory/{timespan}/{interval}",
 		GenerateMemoryData,
 	},
 	Route{
-		"HDDUsage",
+		"HDD",
 		"GET",
 		"/api/hdd/{timespan}/{interval}",
 		GenerateHddData,
 	},
 	Route{
-		"NetworkUsage",
+		"Network",
 		"GET",
 		"/api/network/{timespan}/{interval}",
 		GenerateNetworkData,

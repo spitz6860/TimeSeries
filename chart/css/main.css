@@ -1,14 +1,13 @@
-/*<--Global*/
+
 .container-body {
     min-width: 600px;
     height: 100%;
     width: 100%;
+    font-family: Verdana, sans-serif;
 }
 
 .container-main {
-    height: 100%;
-    padding: 50px 5% 200px 5%;
-    width: 100%;
+    padding: 50px 5% 0px 5%;
 }
 
 .my-checkbox {

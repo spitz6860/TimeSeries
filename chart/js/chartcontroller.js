@@ -1,7 +1,7 @@
 var chartApp = angular.module('chartApp', ['chart.js']);
 
 
-chartApp.controller('chartController', function($scope, chartService) {
+chartApp.controller('ChartController', function($scope, ChartService) {
 	var shown, timespan, intervalOpt;
 
 	$scope.sysComponent = [
@@ -55,14 +55,14 @@ chartApp.controller('chartController', function($scope, chartService) {
 	$scope.dataChart = {};
 
 	$.each($scope.sysComponent, function() {
-		$scope.dataChart[this.value] = chartService.initChart(this.label);
+		$scope.dataChart[this.value] = ChartService.initChart(this.label);
 	});
 
 	$scope.chartOptions = {};
 
 	$scope.fetchData = function() {
 
-		var shownComp, labelChart, tempLabel;
+		var shownComp;
 		shownComp = [];
 
 		$.each($scope.sysComponent, function() {
@@ -73,7 +73,7 @@ chartApp.controller('chartController', function($scope, chartService) {
 		});
 
 		$.each(shownComp, function(index, comp) {
-			chartService.getData(comp, $scope.timespan.value, $scope.interval.value).then(function(res){
+			ChartService.getData(comp, $scope.timespan.value, $scope.interval.value).then(function(res){
 				$scope.dataChart[comp].total = res.Total;
 				$scope.dataChart[comp].unit = res.Unit;
 				$scope.dataChart[comp].usage[0] = res.UsageData;
@@ -83,18 +83,7 @@ chartApp.controller('chartController', function($scope, chartService) {
 		});
 		
 
-		labelChart = chartService.calcLabel($scope.timespan, $scope.interval);
-		
-		if (labelChart.length !== 0) { 
-			tempLabel = labelChart[0];
-			for (i = 1; i < labelChart.length; i++) {
-				if (labelChart[i] === tempLabel) {
-					labelChart[i] = '';
-				} else {
-					tempLabel = labelChart[i];
-				}
-			}
-		}
+		labelChart = ChartService.calcLabel($scope.timespan, $scope.interval);
 
 		$scope.labelChart = labelChart;
 	}
