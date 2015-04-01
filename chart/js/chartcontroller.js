@@ -5,10 +5,10 @@ chartApp.controller('chartController', function($scope, chartService) {
 	var shown, timespan, intervalOpt;
 
 	$scope.sysComponent = [
-		{label: 'CPU', value: 'cpu', checked: false}, 
-		{label: 'HDD', value: 'hdd', checked: false},
-		{label: 'Memory', value: 'memory', checked: false},  
-		{label: 'Network', value: 'network', checked: false}
+		{label: 'CPU', value: 'cpu', checked: true}, 
+		{label: 'HDD', value: 'hdd', checked: true},
+		{label: 'Memory', value: 'memory', checked: true},  
+		{label: 'Network', value: 'network', checked: true}
 	];
 
 	$scope.timespanOpt = [
@@ -52,40 +52,19 @@ chartApp.controller('chartController', function($scope, chartService) {
 
 
 	$scope.labelChart = [];
-	$scope.dataChart = {
-		'cpu': {
-			title: 'CPU',
-			total: '',
-			unit: '',
-			usage: [],
-			show: false
-		},
-		'hdd': {
-			title: 'HDD',
-			total: '',
-			unit: '',
-			usage: [],
-			show: false
-		},
-		'memory': {
-			title: 'Memory',
-			total: '',
-			unit: '',
-			usage: [],
-			show: false
-		},
-		'network': {
-			title: 'Network',
-			total: '',
-			unit: '',
-			usage: [],
-			show: false
-		}	
-	};
+	$scope.dataChart = {};
 
+	$.each($scope.sysComponent, function() {
+		$scope.dataChart[this.value] = chartService.initChart(this.label);
+	});
+
+	$scope.chartOptions = {};
 
 	$scope.fetchData = function() {
-		var shownComp = [];
+
+		var shownComp, labelChart, tempLabel;
+		shownComp = [];
+
 		$.each($scope.sysComponent, function() {
 			$scope.dataChart[this.value].show = false;
 			if (this.checked) {
@@ -99,12 +78,25 @@ chartApp.controller('chartController', function($scope, chartService) {
 				$scope.dataChart[comp].unit = res.Unit;
 				$scope.dataChart[comp].usage[0] = res.UsageData;
 				$scope.dataChart[comp].show = true;
+				$scope.dataChart[comp].options.tooltipTemplate = "<%= value %> " + res.Unit;
 			});
 		});
 		
 
-		$scope.labelChart = chartService.calcLabel($scope.timespan, $scope.interval);
-		console.log($scope);
+		labelChart = chartService.calcLabel($scope.timespan, $scope.interval);
+		
+		if (labelChart.length !== 0) { 
+			tempLabel = labelChart[0];
+			for (i = 1; i < labelChart.length; i++) {
+				if (labelChart[i] === tempLabel) {
+					labelChart[i] = '';
+				} else {
+					tempLabel = labelChart[i];
+				}
+			}
+		}
+
+		$scope.labelChart = labelChart;
 	}
 
 });
