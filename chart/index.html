@@ -46,7 +46,7 @@
 						<div ng-repeat="(key, value) in dataChart" ng-if="value.show">
 							<h3 class="text-center">{{value.title}}</h3>
 							<canvas id="line" class="chart chart-line" data="value.usage"
-							  labels="labelChart" ng-show="value.show">
+							  labels="labelChart">
 							</canvas> 
 						</div>
 					</div>

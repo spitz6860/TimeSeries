@@ -119,7 +119,7 @@ func GenerateIncreasingData(w http.ResponseWriter, r *http.Request, max float64,
 		if randomData >= max {
 			randomData = max
 		}
-		instances = append(instances, (randomData))
+		instances = append(instances, twoDecimal(randomData))
 	}
 	timeseries := TimeSeries{instances, max, unit}
 
