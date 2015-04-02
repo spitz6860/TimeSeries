@@ -1,4 +1,13 @@
-System Usage App Version 0.1 04/01/2015
+System Usage App Version 0.1.0 04/01/2015
+
+Contact Info
+-------------------------
+
+Name: Kai Wu
+
+Phone: 425 638 2382
+
+Email: spitz6860@live.com
 
 
 Description
@@ -33,3 +42,12 @@ able to go to http://localhost:8080/ to view the app. If you wish to change the 
 
 it in line 71 of main.go and then rerun the program.
 
+
+
+-------------------------
+
+Thank you for giving me an opportunity to learn technology. This is my first project using GO and second
+
+project using angular.js. If there is any obvious mistakes in my code please let me know via the contact
+
+info provided above. Any advice is appreciated.

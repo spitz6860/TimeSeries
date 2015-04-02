@@ -12,7 +12,8 @@ chartApp.service('ChartService', ['$http', function($http) {
 				usage: [],
 				show: false,
 				options: {
-					pointHitDetectionRadius : 5
+					pointHitDetectionRadius: 5,
+   					maintainAspectRatio: false
 				}
 			}
 		},

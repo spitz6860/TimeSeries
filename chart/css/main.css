@@ -10,10 +10,17 @@
     padding: 50px 5% 0px 5%;
 }
 
+.container-control {
+	padding: 15px;
+}
+
+.panel-checkbox {
+	width: 150px;
+}
 .my-checkbox {
     margin-left: 20%;
 }
 
 .container-chart {
-    margin-top: 50px;
+    margin-top: 20px;
 }
