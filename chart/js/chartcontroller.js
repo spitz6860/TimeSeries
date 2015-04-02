@@ -1,4 +1,4 @@
-var chartApp = angular.module('chartApp', ['chart.js']);
+var chartApp = angular.module('ChartApp', ['chart.js']);
 
 
 chartApp.controller('ChartController', function($scope, ChartService) {
