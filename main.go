@@ -53,12 +53,6 @@ var routes = Routes{
 
 func main() {
 
-	router := NewRouter()
-
-	log.Fatal(http.ListenAndServe(":8080", router))
-}
-
-func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		var handler http.Handler
@@ -73,7 +67,8 @@ func NewRouter() *mux.Router {
 	}
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./chart/")))
-	return router
+
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
 func GenerateCpuData(w http.ResponseWriter, r *http.Request) {
@@ -92,6 +87,8 @@ func GenerateNetworkData(w http.ResponseWriter, r *http.Request) {
 	GenerateIncreasingData(w, r, 50, "GB")
 }
 
+
+// helper function to generate certain amount of random data based on what the timespan and interval is
 func GenerateRandomData(w http.ResponseWriter, r *http.Request, max float64, unit string) {
 	vars := mux.Vars(r)
 	
@@ -107,6 +104,7 @@ func GenerateRandomData(w http.ResponseWriter, r *http.Request, max float64, uni
 	OutputJson(w, timeseries)
 }
 
+// helper function to generate certain amount of random ever increasing data based on what the timespan and interval is
 func GenerateIncreasingData(w http.ResponseWriter, r *http.Request, max float64, unit string) {
 	vars := mux.Vars(r)
 	
@@ -126,6 +124,7 @@ func GenerateIncreasingData(w http.ResponseWriter, r *http.Request, max float64,
 	OutputJson(w, timeseries)
 }
 
+// calculate how many data points need to be generated
 func CalcTimes(timespanStr string, intervalStr string) int {
 	var interval, timespan int
 	switch intervalStr {
@@ -160,6 +159,7 @@ func CalcTimes(timespanStr string, intervalStr string) int {
 	return timespan/interval + 1
 }
 
+// returns data in json
 func OutputJson(w http.ResponseWriter, data TimeSeries) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
@@ -168,6 +168,7 @@ func OutputJson(w http.ResponseWriter, data TimeSeries) {
 	}
 }
 
+// convert float64 to 2 decimal
 func twoDecimal(k float64) float64 {
 	return float64(int(k * 100)) / 100;
 }

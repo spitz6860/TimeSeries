@@ -4,6 +4,7 @@ var chartApp = angular.module('ChartApp', ['chart.js']);
 chartApp.controller('ChartController', function($scope, ChartService) {
 	var shown, timespan, intervalOpt;
 
+	// system component checkboxes
 	$scope.sysComponent = [
 		{label: 'CPU', value: 'cpu', checked: true}, 
 		{label: 'HDD', value: 'hdd', checked: true},
@@ -11,6 +12,7 @@ chartApp.controller('ChartController', function($scope, ChartService) {
 		{label: 'Network', value: 'network', checked: true}
 	];
 
+	// timespan selector
 	$scope.timespanOpt = [
 		{label: 'Week', value: 'week', inMin: 10080}, 
 		{label: 'Day', value: 'day', inMin: 1440},
@@ -19,6 +21,8 @@ chartApp.controller('ChartController', function($scope, ChartService) {
 
 	$scope.timespan = $scope.timespanOpt[0];
 	
+
+	// update the interval selector based on what timespan is selected 
 	$scope.updateInterval = function(timespan) {
 		switch(timespan.value) {
 			case 'week': 
@@ -60,6 +64,7 @@ chartApp.controller('ChartController', function($scope, ChartService) {
 
 	$scope.chartOptions = {};
 
+	// fetch data for all the charts that need to be shown
 	$scope.fetchData = function() {
 
 		var shownComp;

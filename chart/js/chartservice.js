@@ -22,7 +22,6 @@ chartApp.service('ChartService', ['$http', function($http) {
 				.then(function(result) {
 					return result.data;
 				});
-
 		},
 
 		// calculate chart labels
@@ -60,6 +59,7 @@ chartApp.service('ChartService', ['$http', function($http) {
 				return labelChart;
 			};
 
+			// use a switch here in case more timespan are added in the future
 			switch(timespan.value) {
 				case 'week':
 					label = populateLabel('day', 'MM/DD');
