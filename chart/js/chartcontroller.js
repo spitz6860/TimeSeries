@@ -92,7 +92,4 @@ chartApp.controller('ChartController', function($scope, ChartService) {
 
 		$scope.labelChart = labelChart;
 	}
-$scope.$on('create', function (event, chart) {
-  $(window).trigger('resize');
-});
 });
